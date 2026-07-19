@@ -1,0 +1,34 @@
+# Activar el motor de reescritura
+RewriteEngine On
+
+# ------------------------------------------------------------
+# 1. REDIRECCIÓN AUTOMÁTICA DE HTTP A HTTPS
+# Descomenta estas líneas si tu XAMPP tuviera SSL configurado.
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+# Para esta práctica, lo dejaremos comentado y mostraremos una alternativa de redirección simple.
+# ------------------------------------------------------------
+Redirect 301 /pagina-antigua.html http://localhost/mi_tienda/index.php
+
+# ------------------------------------------------------------
+# 2. PÁGINA DE ERROR 404 PERSONALIZADA
+# Redirige los errores 404 a nuestra página personalizada con Bootstrap
+# ------------------------------------------------------------
+ErrorDocument 404 /mi_tienda/404.php
+
+# ------------------------------------------------------------
+# 3. REESCRITURA DE URL AMIGABLE
+# Permite acceder a /producto/3 en lugar de /producto.php?id=3
+# ^producto/([0-9]+)$  ->  Captura URLs del tipo "producto/" seguido de uno o más números.
+# producto.php?id=$1   ->  La reescribe internamente al script PHP con el parámetro 'id'.
+# [L]                  ->  Indica que es la última regla (Last) a procesar.
+# ------------------------------------------------------------
+RewriteRule ^producto/([0-9]+)$ producto.php?id=$1 [L]
+
+# ------------------------------------------------------------
+# (EXTRA) SEGURIDAD ADICIONAL
+# Prevenir el acceso directo a archivos .htaccess y .htpasswd
+# ------------------------------------------------------------
+<Files ".ht*">
+    Require all denied
+</Files>

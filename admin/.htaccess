@@ -1,0 +1,9 @@
+# Tipo de autenticación
+AuthType Basic
+# Nombre del "reino" o mensaje que aparece en el cuadro de diálogo
+AuthName "Zona Restringida - Solo Administradores"
+# Ruta ABSOLUTA al archivo de contraseñas.
+# ¡IMPORTANTE! Cámbiala por la ruta en tu computadora.
+AuthUserFile C:/xampp/htdocs/mi_tienda/admin/.htpasswd
+# Quién puede acceder (usuarios válidos en el archivo .htpasswd)
+Require valid-user
